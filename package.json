@@ -5,6 +5,7 @@
   "author": "Ben Girardet",
   "main": "index.js",
   "scripts": {
+    "prepare": "npm run build",
     "prebuild": "rimraf dist",
     "postbuild": "gulp",
     "build:commonjs": "tsc --outDir dist/commonjs --module commonjs",
