@@ -20,6 +20,7 @@ import { RegisterCommands } from '../../gql/register';
 import { UserCommands } from '../../gql/user';
 import { CordovaService } from '../../services/cordova-service';
 import { CordovaPushService } from '../../services/cordova-push-service';
+import template from './registration-sms.html';
 let RegistrationSms = class RegistrationSms {
     constructor(router, iLogger, eventAggregator, push, apollo, conf, registerCommands, userCommands, cordova) {
         this.router = router;
@@ -394,7 +395,7 @@ __decorate([
     __metadata("design:type", Object)
 ], RegistrationSms.prototype, "finishComponent", void 0);
 RegistrationSms = __decorate([
-    customElement('registration-sms'),
+    customElement({ name: 'registration-sms', template }),
     inject(),
     __param(0, IRouter),
     __param(1, ILogger),

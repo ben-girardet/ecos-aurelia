@@ -10,6 +10,7 @@ import { RegisterCommands } from '../../gql/register';
 import { UserCommands } from '../../gql/user';
 import { CordovaService } from '../../services/cordova-service';
 import { CordovaPushService } from '../../services/cordova-push-service';
+import template from './registration-sms.html';
 
 // TODO: import type from ecos-types
 interface Image {
@@ -18,7 +19,7 @@ interface Image {
   height: number;
 }
 
-@customElement('registration-sms')
+@customElement({name: 'registration-sms', template})
 @inject()
 export class RegistrationSms implements ICustomElementViewModel {
 

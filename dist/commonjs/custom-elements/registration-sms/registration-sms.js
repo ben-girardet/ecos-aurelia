@@ -26,6 +26,7 @@ const register_1 = require("../../gql/register");
 const user_1 = require("../../gql/user");
 const cordova_service_1 = require("../../services/cordova-service");
 const cordova_push_service_1 = require("../../services/cordova-push-service");
+const registration_sms_html_1 = __importDefault(require("./registration-sms.html"));
 let RegistrationSms = class RegistrationSms {
     constructor(router, iLogger, eventAggregator, push, apollo, conf, registerCommands, userCommands, cordova) {
         this.router = router;
@@ -400,7 +401,7 @@ __decorate([
     __metadata("design:type", Object)
 ], RegistrationSms.prototype, "finishComponent", void 0);
 RegistrationSms = __decorate([
-    aurelia_1.customElement('registration-sms'),
+    aurelia_1.customElement({ name: 'registration-sms', template: registration_sms_html_1.default }),
     aurelia_1.inject(),
     __param(0, aurelia_1.IRouter),
     __param(1, aurelia_1.ILogger),
