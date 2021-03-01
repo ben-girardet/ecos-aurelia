@@ -400,6 +400,7 @@ __decorate([
     __metadata("design:type", Object)
 ], RegistrationSms.prototype, "finishComponent", void 0);
 RegistrationSms = __decorate([
+    aurelia_1.customElement('registration-sms'),
     aurelia_1.inject(),
     __param(0, aurelia_1.IRouter),
     __param(1, aurelia_1.ILogger),

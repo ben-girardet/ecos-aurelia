@@ -12,7 +12,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 import { ApolloService } from '../../services/apollo-service';
 import { gql } from 'apollo-boost';
-import { IRouter, ILogger, inject, bindable, EventAggregator } from 'aurelia';
+import { customElement, IRouter, ILogger, inject, bindable, EventAggregator } from 'aurelia';
 import { EcosNotification } from '../../fast-components/ecos-notification';
 import PhoneNumber from 'awesome-phonenumber';
 import { Configuration } from '../../configuration';
@@ -394,6 +394,7 @@ __decorate([
     __metadata("design:type", Object)
 ], RegistrationSms.prototype, "finishComponent", void 0);
 RegistrationSms = __decorate([
+    customElement('registration-sms'),
     inject(),
     __param(0, IRouter),
     __param(1, ILogger),

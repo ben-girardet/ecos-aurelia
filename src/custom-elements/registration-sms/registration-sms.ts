@@ -2,7 +2,7 @@ import { IToken } from 'ecos-types';
 import { ApolloService } from '../../services/apollo-service';
 import { gql } from 'apollo-boost';
 import { AvatarSelection } from './../avatar-selection/avatar-selection';
-import { ICustomElementViewModel, Constructable, IRouter, ILogger, IDisposable, inject, bindable, EventAggregator } from 'aurelia';
+import { customElement, ICustomElementViewModel, Constructable, IRouter, ILogger, IDisposable, inject, bindable, EventAggregator } from 'aurelia';
 import { EcosNotification } from '../../fast-components/ecos-notification';
 import PhoneNumber from 'awesome-phonenumber';
 import { Configuration } from '../../configuration';
@@ -18,6 +18,7 @@ interface Image {
   height: number;
 }
 
+@customElement('registration-sms')
 @inject()
 export class RegistrationSms implements ICustomElementViewModel {
 
