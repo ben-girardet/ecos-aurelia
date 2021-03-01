@@ -1,0 +1,55 @@
+<!-- TODO: Namespace for ecos translations ?? -->
+<div class="start start-welcome ${welcomeComponent ? 'start--current' : ''}" next.delegate="next('mobile')">
+  <au-compose subject.bind="welcomeComponent"></au-compose>
+</div>
+
+<div class="start start-mobile ${welcomeComponent ? '' : 'start--current'}">
+  <form submit.delegate="requestMobileCode($event)">
+    <h2 t="ecos:registration.Start by entering your mobile number">Start by entering your mobile number</h2>
+    <fast-select t="[placeholder]fields.Your country" placeholder="" value.bind="regionCode" change.delegate="countryChanged()">
+      <fast-option value="ch" t="ecos:countries.Switzerland">Switzerland</fast-option>
+      <fast-option value="fr" t="ecos:countries.France">France</fast-option>
+    </fast-select>
+    <fast-text-field t="[placeholder]ecos:fields.Mobile Number" placeholder="Mobile Number" value.bind="mobile" pattern="[0-9]*" autofocus change.delegate="mobileChanged()" keyup.delegate="mobileChanged()">
+      <span class="start__region-code" slot="start">+${countryCode}</span>
+    </fast-text-field>
+    <fast-button disabled.bind="!isMobileValid" appearance="accent" type="submit">
+      <fast-progress-ring slot="start" if.bind="loading"></fast-progress-ring>
+      <span t="Continue"></span>
+    </fast-button>
+  </form>
+</div>
+
+<div class="start start-validation">
+  <form submit.delegate="validateCode($event)">
+    <h2 t="ecos:registration.Enter the code received on your mobile">Enter the code received on your mobile</h2>
+    <fast-text-field t="[placeholder]ecos:fields.Code" placeholder="Code" value.bind="validationCode" pattern="[0-9]*" autofocus change.delegate="codeChanged()" keyup.delegate="codeChanged()" class="${validationCode ? 'has-value':''}" ref="validationField"></fast-text-field>
+    <fast-button disabled.bind="validationCode.length !== 6" appearance="accent" type="submit">
+      <fast-progress-ring slot="start" if.bind="loading"></fast-progress-ring>
+      <span t="Continue"></span>
+    </fast-button>
+    <fast-anchor if.bind="invalidCode" appearance="lightweight" style="margin-top: 32px;" click.delegate="requestMobileCode(null, true)" t="ecos:registration.Send the code again">Send the code again</fast-anchor>
+    <fast-anchor appearance="lightweight" style="margin-top: 64px;" click.delegate="prev('mobile')" t="ecos:registration.Wrong number">Wrong number ?</fast-anchor>
+  </form>
+</div>
+
+<div class="start start-identity">
+  <form submit.delegate="setIdentity($event)">
+    <h2 t="ecos:registration.Welcome"></h2>
+    <p t="ecos:registration.Setup your profile and enjoy"></p>
+    <fast-text-field t="[placeholder]ecos:fields.Firstname" placeholder="Firstname" value.bind="firstname"></fast-text-field>
+    <fast-text-field t="[placeholder]ecos:fields.Lastname" placeholder="Lastname" value.bind="lastname"></fast-text-field>
+
+    <label style="text-align: center; margin-top: 24px; margin-bottom: 16px; color: var(--accent-color);" t="ecos:fields.Your profile picture">Your profile picture</label>
+    <avatar-selection value.bind="profilePic" original.bind="preview" view-model.ref="avatar"></avatar-selection>
+
+    <fast-button appearance="accent" type="submit">
+      <fast-progress-ring slot="start" if.bind="loading"></fast-progress-ring>
+        <span t="Continue"></span>
+    </fast-button>
+  </form>
+</div>
+
+<div class="start start-finish">
+  <au-compose subject.bind="finishComponent"></au-compose>
+</div>

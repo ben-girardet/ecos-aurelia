@@ -1,0 +1,79 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow: hidden;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
+body {
+  margin: 0;
+}
+a,
+a:visited,
+a:hover,
+a:active {
+  background: transparent;
+  color: var(--neutral-foreground-hint);
+  color: var(--neutral-foreground-rest);
+  text-decoration: none;
+}
+
+form {
+  display: grid;
+  grid-auto-rows: max-content;
+  gap: 20px;
+}
+form label {
+  color: var(--neutral-foreground-rest);
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  --body-font: 'Montserrat', sans-serif;
+  display: block;
+  cursor: pointer;
+  font-size: var(--type-ramp-minus-1-font-size);
+  line-height: var(--type-ramp-minus-1-line-height);
+  letter-spacing: 0.8px;
+  margin-bottom: 4px;
+}
+.button-row__two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: center;
+}
+.button-row__two--small-left {
+  grid-template-columns: auto 1fr;
+}
+.button-row__two--small-right {
+  grid-template-columns: 1fr auto;
+}
+.button-row__two--centered {
+  justify-items: center;
+}
+
+ecos-notification:nth-of-type(2) {
+  margin-top: 50px;
+}
+ecos-notification:nth-of-type(3) {
+  margin-top: 100px;
+}
+ecos-notification:nth-of-type(4) {
+  margin-top: 150px;
+}
+ecos-notification:nth-of-type(5) {
+  margin-top: 200px;
+}
+
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--separator-color);
+  padding: 8px 0px;
+}
+.switch-row:last-of-type {
+  border-bottom: none;
+}

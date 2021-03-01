@@ -1,0 +1,194 @@
+html {
+  background: var(--body-color);
+}
+
+
+/* VIEWPORTS */
+au-viewport {
+  position: absolute;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100vw;
+}
+au-viewport[name=main] { 
+  z-index: 1;
+  top: 0;
+  top: constant(safe-area-inset-top);
+  top: env(safe-area-inset-top);
+  left: 0;
+  bottom: 50px;
+  bottom: calc(50px + constant(safe-area-inset-bottom));
+  bottom: calc(50px + env(safe-area-inset-bottom));
+  transition: all 250ms ease-out;
+  background-color: var(--body-color);
+}
+
+au-viewport[name=bottom] {
+  z-index: 3;
+  height: calc(100%);
+  bottom: 0;
+  left: 0;
+  transform: translateY(150%);
+  transition: transform 250ms ease-out;
+  padding: 16px;
+  background-color: var(--body-color);
+  border-radius: 0;
+  box-shadow: var(--elevation2);
+}
+html.bottom au-viewport[name=bottom] {
+  transform: translateY(0px);
+}
+html.bottom au-viewport[name=main],
+html.bottom au-viewport[name=detail] {
+  transform: scale(0.95);
+  overflow: hidden;
+  background: var(--body-color);
+}
+au-viewport[name=detail] {
+  z-index: 3;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  transition: all 300ms ease-out;
+}
+html.detail au-viewport[name=detail] {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  background-color: var(--body-color);
+}
+
+/* VIEWPARTS */
+.bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  height: calc(50px + constant(safe-area-inset-bottom));
+  height: calc(50px + env(safe-area-inset-bottom));
+  background-color: var(--body-color);
+  border-top: var(--separator-color) 1px solid;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.bottom-bar-button {
+  height: 50px;
+  cursor: pointer;
+  flex-shrink: 1;
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: solid 1px rgba(200, 200, 200, 0.5);
+  position: relative;
+}
+
+.bottom-bar-button.load-active {
+  color: var(--accent-color);;
+  border-top: solid 2px var(--accent-color);;
+}
+
+.bottom-bar-button .praying-button {
+  color: white;
+  background: var(--accent-color);
+  border-radius: 150px;
+  width: 70px;
+  height: 35px;
+}
+.bottom-bar-button.disabled .praying-button {
+  background: #ddd;
+}
+.bottom-bar-button fast-badge {
+  transform: translateX(90%) scale(0.6);
+  position: absolute;
+  top: 0px;
+  right: 50%;
+  --badge-fill-primary: white;
+  box-shadow: var(--elevation0);
+  border-radius: 100%;
+  z-index: 1;
+}
+
+.bottom-bar-button mini-user.active .mini-user__avatar {
+  border: 1px solid #000;
+  padding: 1px;
+}
+
+.list-head {
+  width: 100%;
+  background-color: var(--body-color);
+  padding-top: 0px;
+}
+.list-content {
+  min-height: 200px;
+  background: var(--body-color);
+}
+.list-content-head {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: var(--body-color);
+  z-index:1;
+  transform: translateY(-1px);
+  border-bottom: 1px solid var(--separator-color);
+}
+.list-content-head h2 {
+  margin: 0px;
+}
+.list-content-list {
+  padding: 16px;
+}
+
+.head {
+  width: 100%;
+  position: relative;
+  height: 50px;
+  height: calc(50px + env(safe-area-inset-top));
+  overflow: hidden;
+}
+
+.head__left,
+.head__right {
+  position: fixed;
+  top: 16px;
+  top: calc(16px + constant(safe-area-inset-top));
+  top: calc(16px + env(safe-area-inset-top));
+  left: 16px;
+  left: calc(16px + constant(safe-area-inset-left));
+  left: calc(16px + env(safe-area-inset-left));
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-rendering: optimizelegibility;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, .8);
+  cursor: pointer;
+  background: rgba(0,0,0,0.1);
+  box-shadow: 0 0 32px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+}
+.head__right {
+  left: auto;
+  right: 16px;
+  right: calc(16px + constant(safe-area-inset-right));
+  right: calc(16px + env(safe-area-inset-right));
+}
+
+.head__left pray-icon {
+  margin-right: 8px;
+}
+.head__right pray-icon {
+  margin-left: 8px;
+}
+
+.head fast-button::part(control),
+.bottom-headview fast-button::part(control) {
+  font-size: 16px;
+}

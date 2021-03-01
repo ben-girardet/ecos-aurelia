@@ -1,0 +1,40 @@
+import ApolloClient from 'apollo-boost';
+import { Configuration } from '../configuration';
+import 'gun/sea';
+import { ILogin } from 'ecos-types';
+export declare class ApolloService {
+    private conf;
+    private expires;
+    private userId;
+    authenticated: boolean;
+    private jwt;
+    private privateKey;
+    private state;
+    private rt?;
+    private rtExpiry?;
+    isOutOfDate: boolean;
+    client: ApolloClient<unknown>;
+    constructor(conf: Configuration);
+    setLogin(login: {
+        token: string;
+        userId: string;
+        expires: string;
+        privateKey: string;
+        state: number;
+    }): void;
+    setRefreshToken(refreshToken: string, refreshTokenExpiry: string): void;
+    setState(state: number): void;
+    getState(): number;
+    isTokenValid(): boolean;
+    getUserId(): string;
+    getToken(): string;
+    getJWT(): string;
+    getRefreshToken(): string | null;
+    refresh(): Promise<boolean>;
+    isAuthenticated(): Promise<boolean>;
+    encrypt(message: string, otherPublicKey: string): Promise<any>;
+    decrypt(encryptedMessage: any, otherPublicKey: string): Promise<string>;
+    login(username: string, password: string): Promise<ILogin>;
+    refreshToken(withPrivateKey?: boolean): Promise<ILogin>;
+    logout(): Promise<boolean>;
+}

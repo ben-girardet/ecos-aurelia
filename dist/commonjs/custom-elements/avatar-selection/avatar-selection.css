@@ -1,0 +1,101 @@
+avatar-selection {
+  display: block;
+  overflow: hidden;
+}
+
+.abc {
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+  background: #666;
+  margin: 0 auto;
+  position: relative;
+}
+
+.abc img {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+}
+
+.abc pray-icon {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background: white;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  box-shadow: var(--elevation2);
+}
+
+avatar-selection p {
+  text-align: center;
+}
+
+avatar-selection a {
+  color: var(--accent-color);
+  cursor: pointer;
+}
+
+
+avatar-selection fast-dialog {
+  --dialog-width: 290px;
+  --dialog-height: auto;
+  opacity: 1;
+  transition: opacity ease-in-out 250ms;
+}
+avatar-selection fast-dialog[hidden] {
+  opacity: 0;
+  display: block!important;
+  pointer-events: none;
+}
+avatar-selection fast-dialog::part(control) {
+  transform: scale(1);
+  transition: transform ease-in-out 250ms;
+}
+avatar-selection fast-dialog[hidden]::part(control) {
+  transform: scale(0);
+}
+
+.avatar-selection {
+  display: flex;
+  padding: 32px;
+  flex-wrap: wrap;
+}
+.avatar-selection > span {
+  display: inline-block;
+} 
+.avatar-selection > * {
+  width: 54px;
+  height: 54px;
+  padding: 2px;
+  border-radius: 50px;
+  overflow: hidden;
+  margin-right: 16px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  opacity: 0.5;
+}
+.avatar-selection img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.avatar-selection > *:hover {
+  box-shadow: 0 0 3px rgba(70,51,175,1);
+  box-shadow: 0 0 3px var(--accent-color);
+}
+.avatar-selection > *.selected {
+  opacity: 1;
+  box-shadow: 0 0 3px rgba(70,51,175,1);
+  box-shadow: 0 0 3px var(--accent-color);
+}
+
+.input-file-container {
+  position: absolute;
+  margin-left: -100%;
+  display: none;
+  opacity: 0;
+}

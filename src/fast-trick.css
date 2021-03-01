@@ -1,0 +1,68 @@
+* {
+  --corner-radius: 10;
+}
+fast-design-system-provider {
+  display: inline;
+}
+fast-design-system-provider.dw {
+  display: block;
+  width: 100%;
+}
+fast-text-field::part(control) {
+  width: 100%;
+  font-family: var(--body-font);
+}
+fast-text-field::part(label),
+fast-text-area::part(label) {
+  color: var(--accent-fill-rest);
+}
+fast-tabs.centered {
+  grid-template-columns: none;
+}
+fast-tabs::part(activeIndicator) {
+  height: 2px;
+  border-radius: 0;
+}
+fast-tab:focus {
+  box-shadow: none;
+}
+fast-button[appearance="accent"] {
+  color: white;
+}
+
+
+fast-button fast-progress-ring {
+  margin: 0;
+  width: 20px;
+  height: 20px;
+}
+
+fast-badge {
+  --badge-fill-primary: var(--accent-color);
+  --badge-fill-secondary: var(--meta-content-color);
+  --badge-fill-transparent: transparent;
+  --badge-color-black: #000000;
+  --badge-color-white: #FFFFFF;
+}
+fast-menu-item fast-badge {
+  transform: scale(0.8);
+}
+
+/* fix fast-button start/end mis-align */
+fast-button::part(start),
+fast-button::part(end) {
+  width: auto;
+  height: auto;
+}
+/* full-width buttons */
+fast-button.full-width {
+  width: 100%;
+}
+fast-button.full-width::part(control) {
+  width: 100%;
+  justify-content: start;
+}
+fast-button.full-width::part(end) {
+  margin-left: auto;
+  margin-right: 8px;
+}

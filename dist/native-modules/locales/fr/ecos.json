@@ -1,0 +1,35 @@
+{
+  "fields": {
+    "Your country": "Pays",
+    "Mobile Number": "N° de mobile",
+    "Code": "******",
+    "Firstname": "Prénom",
+    "Lastname": "Nom de famille",
+    "Your profile picture": "Ton image de profile",
+    "Upload a picture of your choice": "Envoie une image de ton choix",
+    "or use a pre-defined image": "ou utilise une image pré-définie"
+  },
+  "countries": {
+    "Switzerland": "Suisse",
+    "France": "France"
+  },
+  "registration": {
+    "Start by entering your mobile number": "Commence par entrer ton numéro de mobile",
+    "Enter the code received on your mobile": "Ecris le code reçu sur ton mobile",
+    "Send the code again": "Renvoyer le code",
+    "Wrong number": "Mauvais numéro ?",
+    "Welcome": "Bienvenue dans Ecos !",
+    "Setup your profile and enjoy": "Prépare ton profile et profite..."
+  },
+  "and": "et",
+  "Save": "Enregistrer",
+  "Close": "Fermer",
+  "Cancel": "Annuler",
+  "Confirm cancel": "Confirmer annulation",
+  "Edit": "Modifier",
+  "Remove": "Retirer",
+  "Confirm remove": "Confirmer",
+  "Delete": "Supprimer",
+  "Continue": "Poursuivre",
+  "Search": "Rechercher"
+}

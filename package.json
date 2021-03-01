@@ -6,7 +6,7 @@
   "main": "dist/commonjs/index.js",
   "module": "dist/native-modules/index.js",
   "scripts": {
-    "prepare": "npm run build",
+    "xprepare": "npm run build",
     "prebuild": "rimraf dist",
     "postbuild": "gulp",
     "build:commonjs": "tsc --outDir dist/commonjs --module commonjs",
@@ -16,10 +16,26 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@aurelia/i18n": "dev",
+    "@havesource/cordova-plugin-push": "^2.0.0",
+    "@microsoft/fast-components": "^1.17.0",
+    "@microsoft/fast-element": "^0.22.2",
+    "apollo-boost": "^0.4.9",
     "aurelia": "dev",
-    "rimraf": "^3.0.2",
+    "awesome-phonenumber": "^2.46.0",
     "concurrently": "^6.0.0",
-    "gulp": "^4.0.2"
+    "croppie": "^2.6.5",
+    "ecos-types": "github:ben-girardet/ecos-types",
+    "graphql": "^15.5.0",
+    "gulp": "^4.0.2",
+    "gun": "^0.2020.520",
+    "heroicons": "^0.4.2",
+    "image-blob-reduce": "^2.2.2",
+    "lodash-es": "^4.17.21",
+    "moment": "^2.29.1",
+    "nanoid": "^3.1.20",
+    "rimraf": "^3.0.2",
+    "sjcl": "^1.0.8"
   },
   "devDependencies": {
     "eslint": "^7.18.0",
