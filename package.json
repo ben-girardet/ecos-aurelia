@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Aurelia plugin for everything ecos",
   "author": "Ben Girardet",
-  "main": "index.js",
+  "main": "dist/commonjs/index.js",
+  "module": "dist/native-modules/index.js",
   "scripts": {
     "prepare": "npm run build",
     "prebuild": "rimraf dist",
