@@ -8,10 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AvatarSelection = void 0;
 const aurelia_1 = require("aurelia");
 const image_service_1 = require("../../services/image-service");
+const avatar_selection_html_1 = __importDefault(require("./avatar-selection.html"));
 let AvatarSelection = class AvatarSelection {
     constructor(imageService) {
         this.imageService = imageService;
@@ -66,7 +70,7 @@ __decorate([
     __metadata("design:type", Object)
 ], AvatarSelection.prototype, "original", void 0);
 AvatarSelection = __decorate([
-    aurelia_1.customElement('avatar-selection'),
+    aurelia_1.customElement({ name: 'avatar-selection', template: avatar_selection_html_1.default }),
     __metadata("design:paramtypes", [image_service_1.ImageService])
 ], AvatarSelection);
 exports.AvatarSelection = AvatarSelection;

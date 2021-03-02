@@ -74,7 +74,7 @@ html.detail au-viewport[name=detail] {
   background-color: var(--body-color);
   border-top: var(--separator-color) 1px solid;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: flex-start;
 }
 

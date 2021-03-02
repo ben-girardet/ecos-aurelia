@@ -8,10 +8,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var MiniUser_1;
-console.log('ECOS: top of mini-user');
 import { gql } from 'apollo-boost';
-import { bindable, EventAggregator, inject } from 'aurelia';
+import { customElement, bindable, EventAggregator, inject } from 'aurelia';
 import { ApolloService } from './../../services/apollo-service';
+import template from './mini-user.html';
 let MiniUser = MiniUser_1 = class MiniUser {
     constructor(eventAggregator, apollo) {
         this.eventAggregator = eventAggregator;
@@ -78,6 +78,7 @@ __decorate([
     __metadata("design:type", String)
 ], MiniUser.prototype, "size", void 0);
 MiniUser = MiniUser_1 = __decorate([
+    customElement({ name: 'mini-user', template }),
     inject(EventAggregator, ApolloService),
     __metadata("design:paramtypes", [EventAggregator,
         ApolloService])

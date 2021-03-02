@@ -8,13 +8,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 var MiniUser_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MiniUser = void 0;
-console.log('ECOS: top of mini-user');
 const apollo_boost_1 = require("apollo-boost");
 const aurelia_1 = require("aurelia");
 const apollo_service_1 = require("./../../services/apollo-service");
+const mini_user_html_1 = __importDefault(require("./mini-user.html"));
 let MiniUser = MiniUser_1 = class MiniUser {
     constructor(eventAggregator, apollo) {
         this.eventAggregator = eventAggregator;
@@ -81,6 +84,7 @@ __decorate([
     __metadata("design:type", String)
 ], MiniUser.prototype, "size", void 0);
 MiniUser = MiniUser_1 = __decorate([
+    aurelia_1.customElement({ name: 'mini-user', template: mini_user_html_1.default }),
     aurelia_1.inject(aurelia_1.EventAggregator, apollo_service_1.ApolloService),
     __metadata("design:paramtypes", [aurelia_1.EventAggregator,
         apollo_service_1.ApolloService])

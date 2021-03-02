@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { customElement, bindable, BindingMode } from 'aurelia';
 import { ImageService } from '../../services/image-service';
+import template from './avatar-selection.html';
 let AvatarSelection = class AvatarSelection {
     constructor(imageService) {
         this.imageService = imageService;
@@ -63,7 +64,7 @@ __decorate([
     __metadata("design:type", Object)
 ], AvatarSelection.prototype, "original", void 0);
 AvatarSelection = __decorate([
-    customElement('avatar-selection'),
+    customElement({ name: 'avatar-selection', template }),
     __metadata("design:paramtypes", [ImageService])
 ], AvatarSelection);
 export { AvatarSelection };

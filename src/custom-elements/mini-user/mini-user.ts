@@ -1,9 +1,10 @@
-console.log('ECOS: top of mini-user');
 import { gql } from 'apollo-boost';
-import { bindable, IDisposable, EventAggregator, ILogger, inject } from 'aurelia';
+import { customElement, bindable, IDisposable, EventAggregator, ILogger, inject } from 'aurelia';
 import { ApolloService } from './../../services/apollo-service';
 import { IUser } from 'ecos-types';
+import template from './mini-user.html';
 
+@customElement({name: 'mini-user', template})
 @inject(EventAggregator, ApolloService)
 export class MiniUser {
   @bindable userId: string;

@@ -1,7 +1,8 @@
 import { customElement, bindable, BindingMode } from 'aurelia';
 import { ImageService } from '../../services/image-service';
+import template from './avatar-selection.html';
 
-@customElement('avatar-selection')
+@customElement({name: 'avatar-selection', template})
 export class AvatarSelection {
 
   @bindable({mode: BindingMode.twoWay}) public profilePic: string;
