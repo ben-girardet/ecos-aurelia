@@ -1,0 +1,21 @@
+<import from="./ecos-bottom.css"></import>
+
+<div class="ecos-bottom-headview">
+  <fast-button appearance="lightweight" click.trigger="cancel()" t="Cancel">Cancel</fast-button>
+  <span t="account.Edit my profile">Edit Profile</span>
+  <fast-button appearance="lightweight" click.trigger="save()" t="Save">Save</fast-button>
+</div>
+
+<div class="ecos-bottom-contentview ${avatar.imageService.cropping ? 'full-height':''}">
+  <form class="edit-profile-form">
+
+    <fast-text-field placeholder="Firstname" t="[placeholder]fields.Firstname" value.two-way="firstname">
+    </fast-text-field>
+    <fast-text-field placeholder="Lastname" t="[placeholder]fields.Lastname" value.two-way="lastname">
+    </fast-text-field>
+  
+    <label style="text-align: center;" t="fields.Your profile picture">Your profile picture</label>
+    <avatar-selection value.bind="profilePic" original.bind="preview" view-model.ref="avatar"></avatar-selection>
+    
+  </form>
+</div>

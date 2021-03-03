@@ -51,6 +51,7 @@ export * from './adapters';
 export * from './custom-elements';
 export * from './fast-components';
 export * from './gql';
+export * from './routes';
 export * from './services';
 export * from './value-converters';
 export * from './configuration';

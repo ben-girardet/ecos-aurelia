@@ -1,0 +1,60 @@
+.ecos-account {
+  padding: 16px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ecos-account-profile {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-gap: 32px;
+  align-items: center;
+  justify-items: flex-start;
+  padding: 0 16px;
+}
+.ecos-account-profile img {
+  width: 100%;
+  border-radius: 100%;
+}
+.ecos-account-profile .name {
+  font-size: 1.5rem;
+} 
+.ecos-account-profile div.details {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
+  align-items: center;
+  justify-items: center;
+}
+.ecos-account-profile div.details > .detail {
+  font-size: 1rem;
+  text-align: center;
+  color: #666;
+}
+.ecos-account-profile div.details > .detail > :last-child {
+  font-size: 0.7rem;
+}
+
+.ecos-account .lang-selector {
+  margin: 32px 0 16px;
+  width: 100%;
+}
+
+.ecos-account fast-menu {
+  margin-left: -16px;
+  margin-right: -16px;
+  max-width: none;
+  --corner-radius: 0;
+  --elevation: 8;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.ecos-account fast-menu-item {
+  border-bottom: 1px solid var(--separator-color);
+  --corner-radius: 0;
+}
+.ecos-account fast-menu-item:last-of-type {
+  border-bottom: none;
+}

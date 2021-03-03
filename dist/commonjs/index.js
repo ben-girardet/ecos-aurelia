@@ -76,6 +76,7 @@ __exportStar(require("./adapters"), exports);
 __exportStar(require("./custom-elements"), exports);
 __exportStar(require("./fast-components"), exports);
 __exportStar(require("./gql"), exports);
+__exportStar(require("./routes"), exports);
 __exportStar(require("./services"), exports);
 __exportStar(require("./value-converters"), exports);
 __exportStar(require("./configuration"), exports);
