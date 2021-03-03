@@ -1,3 +1,6 @@
+import { valueConverter } from 'aurelia';
+
+@valueConverter('nl2br')
 export class Nl2brValueConverter {
   public toView(value: any, breakTag = '<br>') {
     if (!value || typeof value !== 'string') return value;;

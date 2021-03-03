@@ -181,10 +181,10 @@ html.detail au-viewport[name=detail] {
   right: calc(16px + env(safe-area-inset-right));
 }
 
-.head__left pray-icon {
+.head__left ecos-icon {
   margin-right: 8px;
 }
-.head__right pray-icon {
+.head__right ecos-icon {
   margin-left: 8px;
 }
 

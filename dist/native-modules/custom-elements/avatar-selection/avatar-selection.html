@@ -5,7 +5,7 @@
   <img if.bind="avatar === 'original'" src="${original | file}" />
   <img if.bind="avatar === 'image' && imageService.mediumB64" src.bind="imageService.mediumB64" />
   <img if.bind="avatar !== 'original' && avatar !== 'image' && avatar" src="images/avatars/${avatar}.gif" />
-  <pray-icon appearance="accent" icon="Photograph" size="lg"></pray-icon>
+  <ecos-icon appearance="accent" icon="Photograph" size="lg"></ecos-icon>
 </div>
 
 <p>${'ecos:fields.Upload a picture of your choice' | t} <a click.delegate="toggleDialog()">${'ecos:fields.or use a pre-defined image' | t}</a></p>
@@ -54,12 +54,12 @@
 <div class="image-cropping ${imageService.cropping ? '' : 'hidden'}" ref="croppieElement">
   <div class="head on-image">
     <span class="head__left" click.delegate="imageService.cancelImage()">
-      <pray-icon icon="ArrowLeft" weight="2"></pray-icon>
+      <ecos-icon icon="ArrowLeft" weight="2"></ecos-icon>
       ${'Cancel' | t}
     </span>
     <span class="head__right" click.delegate="imageService.saveCrop()">
       ${'Save' | t}
-      <pray-icon icon="Check" weight="2"></pray-icon>
+      <ecos-icon icon="Check" weight="2"></ecos-icon>
     </span>
   </div>
 </div>

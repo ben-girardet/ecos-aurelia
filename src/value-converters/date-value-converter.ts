@@ -1,5 +1,7 @@
+import { valueConverter } from 'aurelia';
 import moment from 'moment';
 
+@valueConverter('date')
 export class DateValueConverter {
   public toView(dateString: string, format= 'DD/MM/YYYY'): string {
     const m = moment(dateString);

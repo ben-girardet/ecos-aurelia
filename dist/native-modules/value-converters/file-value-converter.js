@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { inject } from 'aurelia';
+import { inject, valueConverter } from 'aurelia';
 import { Configuration } from '../configuration';
 let FileValueConverter = class FileValueConverter {
     constructor(conf) {
@@ -52,6 +52,7 @@ let FileValueConverter = class FileValueConverter {
     }
 };
 FileValueConverter = __decorate([
+    valueConverter('file'),
     inject(Configuration),
     __metadata("design:paramtypes", [Configuration])
 ], FileValueConverter);

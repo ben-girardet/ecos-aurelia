@@ -59,6 +59,7 @@ exports.Ecos = {
                     console.log('ECOS: registering custom elements', EcosCustomElements);
                     container.register(EcosCustomElements);
                     container.register(EcosValueConverters);
+                    console.log('ECOS: registering value converters', EcosValueConverters);
                     container.register(fast_adapter_1.AureliaFastAdapter);
                 }
                 const configuration = new configuration_1.Configuration();
@@ -74,6 +75,7 @@ exports.Ecos = {
 __exportStar(require("./adapters"), exports);
 __exportStar(require("./custom-elements"), exports);
 __exportStar(require("./fast-components"), exports);
+__exportStar(require("./gql"), exports);
 __exportStar(require("./services"), exports);
 __exportStar(require("./value-converters"), exports);
 __exportStar(require("./configuration"), exports);

@@ -55,6 +55,7 @@ let FileValueConverter = class FileValueConverter {
     }
 };
 FileValueConverter = __decorate([
+    aurelia_1.valueConverter('file'),
     aurelia_1.inject(configuration_1.Configuration),
     __metadata("design:paramtypes", [configuration_1.Configuration])
 ], FileValueConverter);

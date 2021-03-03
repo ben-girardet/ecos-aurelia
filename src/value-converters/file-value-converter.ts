@@ -1,6 +1,7 @@
-import { inject } from 'aurelia';
+import { inject, valueConverter } from 'aurelia';
 import { Configuration } from '../configuration';
 
+@valueConverter('file')
 @inject(Configuration)
 export class FileValueConverter {
 
