@@ -17,7 +17,6 @@ import { UserCommands } from '../gql';
 import { gql } from 'apollo-boost';
 import { route } from 'aurelia';
 import template from './ecos-edit-profile-route.html';
-import { EcosEmptyComponent } from './ecos-empty-component';
 import './ecos-edit-profile-route.css';
 let EcosEditProfileRoute = class EcosEditProfileRoute {
     constructor(router, imageService, eventAggregator, apollo, userCommands) {
@@ -92,14 +91,14 @@ user(id: $userId) {
         try {
             await this.userCommands.editMe(editUserData.firstname, editUserData.lastname, editUserData.picture);
             this.eventAggregator.publish('user:changed', this.apollo.getUserId());
-            this.router.load({ component: EcosEmptyComponent, viewport: 'bottom' });
+            this.router.load('+ecos-empty@bottom');
         }
         catch (error) {
             EcosNotification.notify(error.message, 'info');
         }
     }
     cancel() {
-        this.router.load({ component: EcosEmptyComponent, viewport: 'bottom' });
+        this.router.load('+ecos-empty@bottom');
     }
     removeImage() {
         this.imageService.removeImage();
