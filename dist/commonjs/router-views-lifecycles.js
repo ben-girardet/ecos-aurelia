@@ -7,7 +7,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EcosRouterViewsLifecycles = void 0;
-const ecos_empty_component_1 = require("./routes/ecos-empty-component");
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const aurelia_1 = require("aurelia");
 // import { ApolloService } from './services/apollo-service';
@@ -17,8 +16,9 @@ let EcosRouterViewsLifecycles = class EcosRouterViewsLifecycles {
     // }
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     load(vm, params, current) {
+        console.log('load', current);
         if (current.viewport === 'bottom') {
-            if (vm instanceof ecos_empty_component_1.EcosEmptyComponent) {
+            if (current.path === 'empty') {
                 document.documentElement.classList.remove('bottom');
             }
             else {
