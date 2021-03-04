@@ -97,14 +97,14 @@ user(id: $userId) {
         try {
             await this.userCommands.editMe(editUserData.firstname, editUserData.lastname, editUserData.picture);
             this.eventAggregator.publish('user:changed', this.apollo.getUserId());
-            this.router.load('+ecos-empty@bottom');
+            this.router.load('../ecos-empty@bottom');
         }
         catch (error) {
             fast_components_1.EcosNotification.notify(error.message, 'info');
         }
     }
     cancel() {
-        this.router.load('+ecos-empty@bottom');
+        this.router.load('../ecos-empty@bottom');
     }
     removeImage() {
         this.imageService.removeImage();
