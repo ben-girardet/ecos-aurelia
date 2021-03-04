@@ -15,8 +15,9 @@ export class EcosRouterViewsLifecycles {
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   public load(vm: any, params: any, current: RouteNode): void {
+    console.log('load', current);
     if (current.viewport === 'bottom') {
-      if (vm instanceof EcosEmptyComponent) {
+      if (current.path === 'empty') {
         document.documentElement.classList.remove('bottom');
       } else {
         document.documentElement.classList.add('bottom');
