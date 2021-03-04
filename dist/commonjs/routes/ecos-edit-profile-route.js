@@ -11,6 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EcosEditProfileRoute = void 0;
 const fast_components_1 = require("../fast-components");
@@ -19,6 +22,8 @@ const services_1 = require("../services");
 const gql_1 = require("../gql");
 const apollo_boost_1 = require("apollo-boost");
 const aurelia_2 = require("aurelia");
+const ecos_edit_profile_route_html_1 = __importDefault(require("./ecos-edit-profile-route.html"));
+const ecos_empty_component_1 = require("./ecos-empty-component");
 require("./ecos-edit-profile-route.css");
 let EcosEditProfileRoute = class EcosEditProfileRoute {
     constructor(router, imageService, eventAggregator, apollo, userCommands) {
@@ -93,14 +98,14 @@ user(id: $userId) {
         try {
             await this.userCommands.editMe(editUserData.firstname, editUserData.lastname, editUserData.picture);
             this.eventAggregator.publish('user:changed', this.apollo.getUserId());
-            this.router.load('../account');
+            this.router.load({ component: ecos_empty_component_1.EcosEmptyComponent, viewport: 'bottom' });
         }
         catch (error) {
             fast_components_1.EcosNotification.notify(error.message, 'info');
         }
     }
     cancel() {
-        this.router.load('../account');
+        this.router.load({ component: ecos_empty_component_1.EcosEmptyComponent, viewport: 'bottom' });
     }
     removeImage() {
         this.imageService.removeImage();
@@ -108,6 +113,7 @@ user(id: $userId) {
 };
 EcosEditProfileRoute = __decorate([
     aurelia_2.route({ data: { auth: '1', blackOpaque: '0' } }),
+    aurelia_1.customElement({ name: 'ecos-edit-profile-route', template: ecos_edit_profile_route_html_1.default }),
     aurelia_1.inject(),
     __param(0, aurelia_1.IRouter),
     __metadata("design:paramtypes", [Object, services_1.ImageService,

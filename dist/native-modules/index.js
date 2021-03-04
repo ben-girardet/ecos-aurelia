@@ -5,7 +5,8 @@ import { ApolloService } from './services/apollo-service';
 import * as EcosCustomElements from './custom-elements';
 import * as EcosValueConverters from './value-converters';
 import * as EcosRoutes from './routes';
-import { EcosRouterLifecycles } from './router-lifecycles';
+import { EcosRouterAuthLifecycles } from './router-auth-lifecycles';
+import { EcosRouterViewsLifecycles } from './router-views-lifecycles';
 // TODO: find out if we can conditionnally import these styles
 import './variables.css';
 import './basics.css';
@@ -23,26 +24,27 @@ EcosNotification;
 export const Ecos = {
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     configure(config) {
-        console.log('ECOS: configure');
+        // console.log('ECOS: configure');
         return {
             register(container) {
-                console.log('ECOS: register');
+                // console.log('ECOS: register');
                 if (config.autoRegister) {
-                    container.register(EcosRouterLifecycles);
+                    container.register(EcosRouterAuthLifecycles);
+                    container.register(EcosRouterViewsLifecycles);
                     container.register(ApolloService);
-                    console.log('ECOS: registering custom elements', EcosCustomElements);
+                    // console.log('ECOS: registering custom elements', EcosCustomElements);
                     container.register(EcosCustomElements);
                     container.register(EcosValueConverters);
-                    console.log('ECOS: registering value converters', EcosValueConverters);
+                    // console.log('ECOS: registering value converters', EcosValueConverters);
                     container.register(AureliaFastAdapter);
-                    console.log('ECOS: registering routes', EcosValueConverters);
+                    // console.log('ECOS: registering routes', EcosValueConverters);
                     container.register(EcosRoutes);
                 }
                 const configuration = new Configuration();
                 configuration.apiHost = config.apiHost;
                 configuration.unauthorizedDefaultRoute = config.unauthorizedDefaultRoute;
                 configuration.authorizedDefaultRoute = config.authorizedDefaultRoute;
-                console.log('register configuration', configuration);
+                // console.log('register configuration', configuration);
                 container.register(Registration.instance(Configuration, configuration));
             }
         };

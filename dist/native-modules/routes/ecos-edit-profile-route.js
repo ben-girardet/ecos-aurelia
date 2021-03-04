@@ -11,11 +11,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { EcosNotification } from '../fast-components';
-import { inject, EventAggregator, IRouter } from 'aurelia';
+import { customElement, inject, EventAggregator, IRouter } from 'aurelia';
 import { ApolloService, ImageService } from '../services';
 import { UserCommands } from '../gql';
 import { gql } from 'apollo-boost';
 import { route } from 'aurelia';
+import template from './ecos-edit-profile-route.html';
+import { EcosEmptyComponent } from './ecos-empty-component';
 import './ecos-edit-profile-route.css';
 let EcosEditProfileRoute = class EcosEditProfileRoute {
     constructor(router, imageService, eventAggregator, apollo, userCommands) {
@@ -90,14 +92,14 @@ user(id: $userId) {
         try {
             await this.userCommands.editMe(editUserData.firstname, editUserData.lastname, editUserData.picture);
             this.eventAggregator.publish('user:changed', this.apollo.getUserId());
-            this.router.load('../account');
+            this.router.load({ component: EcosEmptyComponent, viewport: 'bottom' });
         }
         catch (error) {
             EcosNotification.notify(error.message, 'info');
         }
     }
     cancel() {
-        this.router.load('../account');
+        this.router.load({ component: EcosEmptyComponent, viewport: 'bottom' });
     }
     removeImage() {
         this.imageService.removeImage();
@@ -105,6 +107,7 @@ user(id: $userId) {
 };
 EcosEditProfileRoute = __decorate([
     route({ data: { auth: '1', blackOpaque: '0' } }),
+    customElement({ name: 'ecos-edit-profile-route', template }),
     inject(),
     __param(0, IRouter),
     __metadata("design:paramtypes", [Object, ImageService,

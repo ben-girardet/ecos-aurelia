@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-import { EcosEditProfileRoute } from './ecos-edit-profile-route';
 import { EcosNotification } from '../fast-components';
 import { ApolloService } from '../services';
 import { gql } from 'apollo-boost';
@@ -81,7 +80,8 @@ user(id: $userId) {
         location.href = link;
     }
     loadEcosEditProfileRoute() {
-        this.router.load({ component: EcosEditProfileRoute, viewport: 'bottom' });
+        // this.router.load({component: EcosEditProfileRoute, viewport: 'bottom'});
+        this.router.load('+ecos-edit-profile-route@bottom');
     }
 };
 EcosAccountRoute = __decorate([

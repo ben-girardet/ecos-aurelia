@@ -11,41 +11,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { lifecycleHooks, inject } from 'aurelia';
 import { ApolloService } from './services/apollo-service';
 import { Configuration } from './configuration';
-let EcosRouterLifecycles = class EcosRouterLifecycles {
+let EcosRouterAuthLifecycles = class EcosRouterAuthLifecycles {
     constructor(apollo, conf) {
         this.apollo = apollo;
         this.conf = conf;
     }
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     async canLoad(vm, params, next, current) {
-        console.log('canLoad');
-        console.log('vm', vm);
-        console.log('params', params);
-        console.log('next', next);
-        console.log('current', current);
         const requiresAuth = current.data.auth !== undefined && current.data.auth !== '0';
         if (requiresAuth && !(await this.apollo.isAuthenticated())) {
-            console.log('redirect to login');
             return this.conf.unauthorizedDefaultRoute;
         }
         if (!requiresAuth && (await this.apollo.isAuthenticated()) && current.finalPath === this.conf.unauthorizedDefaultRoute) {
-            console.log('redirect to auth default');
             return this.conf.authorizedDefaultRoute;
         }
         return true;
     }
-    unload(vm, params, current, next) {
-        console.log('unload');
-        console.log('vm', vm);
-        console.log('params', params);
-        console.log('next', next);
-        console.log('current', current);
-        // remove the "tag" in the body
-    }
 };
-EcosRouterLifecycles = __decorate([
+EcosRouterAuthLifecycles = __decorate([
     lifecycleHooks(),
     inject(),
     __metadata("design:paramtypes", [ApolloService, Configuration])
-], EcosRouterLifecycles);
-export { EcosRouterLifecycles };
+], EcosRouterAuthLifecycles);
+export { EcosRouterAuthLifecycles };

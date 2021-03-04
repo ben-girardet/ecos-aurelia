@@ -13,7 +13,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EcosAccountRoute = void 0;
-const ecos_edit_profile_route_1 = require("./ecos-edit-profile-route");
 const fast_components_1 = require("../fast-components");
 const services_1 = require("../services");
 const apollo_boost_1 = require("apollo-boost");
@@ -84,7 +83,8 @@ user(id: $userId) {
         location.href = link;
     }
     loadEcosEditProfileRoute() {
-        this.router.load({ component: ecos_edit_profile_route_1.EcosEditProfileRoute, viewport: 'bottom' });
+        // this.router.load({component: EcosEditProfileRoute, viewport: 'bottom'});
+        this.router.load('+ecos-edit-profile-route@bottom');
     }
 };
 EcosAccountRoute = __decorate([

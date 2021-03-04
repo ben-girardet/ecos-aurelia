@@ -1,15 +1,18 @@
 import { AvatarSelection } from '../custom-elements';
 import { EcosNotification } from '../fast-components';
-import { IRouteViewModel, ICustomElementViewModel, inject, EventAggregator, IRouter } from 'aurelia';
+import { customElement, IRouteViewModel, ICustomElementViewModel, inject, EventAggregator, IRouter } from 'aurelia';
 import Croppie from 'croppie';
 import { ApolloService, ImageService } from '../services';
 import { IImage } from 'ecos-types';
 import { UserCommands } from '../gql';
 import { gql } from 'apollo-boost';
 import { route } from 'aurelia';
+import template from './ecos-edit-profile-route.html';
+import { EcosEmptyComponent } from './ecos-empty-component';
 import './ecos-edit-profile-route.css';
 
 @route({data: {auth: '1', blackOpaque: '0'}})
+@customElement({ name: 'ecos-edit-profile-route', template })
 @inject()
 export class EcosEditProfileRoute implements IRouteViewModel, ICustomElementViewModel {
 
@@ -104,20 +107,17 @@ user(id: $userId) {
     try {
       await this.userCommands.editMe(editUserData.firstname, editUserData.lastname, editUserData.picture);
       this.eventAggregator.publish('user:changed', this.apollo.getUserId());
-      this.router.load('../account');
+      this.router.load({component: EcosEmptyComponent, viewport: 'bottom'});
     } catch (error) {
       EcosNotification.notify(error.message, 'info');
     }
   }
   
   public cancel(): void {
-    this.router.load('../account');
+    this.router.load({component: EcosEmptyComponent, viewport: 'bottom'});
   }
 
   public removeImage(): void {
     this.imageService.removeImage();
   }
-
-  
-
 }

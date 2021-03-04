@@ -32,7 +32,8 @@ exports.EcosCustomElements = EcosCustomElements;
 const EcosValueConverters = __importStar(require("./value-converters"));
 exports.EcosValueConverters = EcosValueConverters;
 const EcosRoutes = __importStar(require("./routes"));
-const router_lifecycles_1 = require("./router-lifecycles");
+const router_auth_lifecycles_1 = require("./router-auth-lifecycles");
+const router_views_lifecycles_1 = require("./router-views-lifecycles");
 // TODO: find out if we can conditionnally import these styles
 require("./variables.css");
 require("./basics.css");
@@ -50,26 +51,27 @@ ecos_notification_1.EcosNotification;
 exports.Ecos = {
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     configure(config) {
-        console.log('ECOS: configure');
+        // console.log('ECOS: configure');
         return {
             register(container) {
-                console.log('ECOS: register');
+                // console.log('ECOS: register');
                 if (config.autoRegister) {
-                    container.register(router_lifecycles_1.EcosRouterLifecycles);
+                    container.register(router_auth_lifecycles_1.EcosRouterAuthLifecycles);
+                    container.register(router_views_lifecycles_1.EcosRouterViewsLifecycles);
                     container.register(apollo_service_1.ApolloService);
-                    console.log('ECOS: registering custom elements', EcosCustomElements);
+                    // console.log('ECOS: registering custom elements', EcosCustomElements);
                     container.register(EcosCustomElements);
                     container.register(EcosValueConverters);
-                    console.log('ECOS: registering value converters', EcosValueConverters);
+                    // console.log('ECOS: registering value converters', EcosValueConverters);
                     container.register(fast_adapter_1.AureliaFastAdapter);
-                    console.log('ECOS: registering routes', EcosValueConverters);
+                    // console.log('ECOS: registering routes', EcosValueConverters);
                     container.register(EcosRoutes);
                 }
                 const configuration = new configuration_1.Configuration();
                 configuration.apiHost = config.apiHost;
                 configuration.unauthorizedDefaultRoute = config.unauthorizedDefaultRoute;
                 configuration.authorizedDefaultRoute = config.authorizedDefaultRoute;
-                console.log('register configuration', configuration);
+                // console.log('register configuration', configuration);
                 container.register(aurelia_1.Registration.instance(configuration_1.Configuration, configuration));
             }
         };

@@ -89,6 +89,7 @@ user(id: $userId) {
   }
 
   public loadEcosEditProfileRoute(): void {
-    this.router.load({component: EcosEditProfileRoute, viewport: 'bottom'});
+    // this.router.load({component: EcosEditProfileRoute, viewport: 'bottom'});
+    this.router.load('+ecos-edit-profile-route@bottom');
   }
 }
