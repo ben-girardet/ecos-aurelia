@@ -31,6 +31,7 @@ const EcosCustomElements = __importStar(require("./custom-elements"));
 exports.EcosCustomElements = EcosCustomElements;
 const EcosValueConverters = __importStar(require("./value-converters"));
 exports.EcosValueConverters = EcosValueConverters;
+const EcosRoutes = __importStar(require("./routes"));
 const router_lifecycles_1 = require("./router-lifecycles");
 // TODO: find out if we can conditionnally import these styles
 require("./variables.css");
@@ -61,6 +62,8 @@ exports.Ecos = {
                     container.register(EcosValueConverters);
                     console.log('ECOS: registering value converters', EcosValueConverters);
                     container.register(fast_adapter_1.AureliaFastAdapter);
+                    console.log('ECOS: registering routes', EcosValueConverters);
+                    container.register(EcosRoutes);
                 }
                 const configuration = new configuration_1.Configuration();
                 configuration.apiHost = config.apiHost;

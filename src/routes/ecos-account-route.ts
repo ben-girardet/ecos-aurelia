@@ -1,12 +1,14 @@
+import { EcosEditProfileRoute } from './ecos-edit-profile-route';
 import { EcosNotification } from '../fast-components';
 import { ApolloService } from '../services';
 import { gql } from 'apollo-boost';
 import { inject, IRouteViewModel, ICustomElementViewModel, IDisposable, EventAggregator, IRouter } from 'aurelia';
 import { IUser } from 'ecos-types';
 import { I18N } from '@aurelia/i18n';
+import { Configuration } from '../configuration';
 import './ecos-account-route.css';
 
-@inject(IRouter, EventAggregator, I18N, ApolloService)
+@inject(IRouter, EventAggregator, I18N, ApolloService, Configuration)
 export class EcosAccountRoute implements IRouteViewModel, ICustomElementViewModel {
 
   public user: IUser;
@@ -17,7 +19,8 @@ export class EcosAccountRoute implements IRouteViewModel, ICustomElementViewMode
     @IRouter private router: IRouter, 
     private eventAggregator: EventAggregator, 
     private i18n: I18N,
-    private apollo: ApolloService) {
+    private apollo: ApolloService,
+    private conf: Configuration) {
   }
 
   public async binding(): Promise<void> {
@@ -70,7 +73,7 @@ user(id: $userId) {
       // await this.userCommands.logout();
       await this.apollo.logout();
       this.eventAggregator.publish('logout');
-      this.router.load('start');
+      this.router.load(this.conf.unauthorizedDefaultRoute);
     } catch (error) {
       EcosNotification.notify(error.message, 'error');
     }
@@ -86,6 +89,6 @@ user(id: $userId) {
   }
 
   public loadEcosEditProfileRoute(): void {
-    this.router.load('../ecos-edit-profile-route');
+    this.router.load({component: EcosEditProfileRoute, viewport: 'bottom'});
   }
 }

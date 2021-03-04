@@ -13,18 +13,21 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EcosAccountRoute = void 0;
+const ecos_edit_profile_route_1 = require("./ecos-edit-profile-route");
 const fast_components_1 = require("../fast-components");
 const services_1 = require("../services");
 const apollo_boost_1 = require("apollo-boost");
 const aurelia_1 = require("aurelia");
 const i18n_1 = require("@aurelia/i18n");
+const configuration_1 = require("../configuration");
 require("./ecos-account-route.css");
 let EcosAccountRoute = class EcosAccountRoute {
-    constructor(router, eventAggregator, i18n, apollo) {
+    constructor(router, eventAggregator, i18n, apollo, conf) {
         this.router = router;
         this.eventAggregator = eventAggregator;
         this.i18n = i18n;
         this.apollo = apollo;
+        this.conf = conf;
         this.events = [];
     }
     async binding() {
@@ -67,7 +70,7 @@ user(id: $userId) {
             // await this.userCommands.logout();
             await this.apollo.logout();
             this.eventAggregator.publish('logout');
-            this.router.load('start');
+            this.router.load(this.conf.unauthorizedDefaultRoute);
         }
         catch (error) {
             fast_components_1.EcosNotification.notify(error.message, 'error');
@@ -81,12 +84,13 @@ user(id: $userId) {
         location.href = link;
     }
     loadEcosEditProfileRoute() {
-        this.router.load('../ecos-edit-profile-route');
+        this.router.load({ component: ecos_edit_profile_route_1.EcosEditProfileRoute, viewport: 'bottom' });
     }
 };
 EcosAccountRoute = __decorate([
-    aurelia_1.inject(aurelia_1.IRouter, aurelia_1.EventAggregator, i18n_1.I18N, services_1.ApolloService),
+    aurelia_1.inject(aurelia_1.IRouter, aurelia_1.EventAggregator, i18n_1.I18N, services_1.ApolloService, configuration_1.Configuration),
     __param(0, aurelia_1.IRouter),
-    __metadata("design:paramtypes", [Object, aurelia_1.EventAggregator, Object, services_1.ApolloService])
+    __metadata("design:paramtypes", [Object, aurelia_1.EventAggregator, Object, services_1.ApolloService,
+        configuration_1.Configuration])
 ], EcosAccountRoute);
 exports.EcosAccountRoute = EcosAccountRoute;

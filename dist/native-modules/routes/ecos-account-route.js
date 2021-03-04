@@ -10,18 +10,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+import { EcosEditProfileRoute } from './ecos-edit-profile-route';
 import { EcosNotification } from '../fast-components';
 import { ApolloService } from '../services';
 import { gql } from 'apollo-boost';
 import { inject, EventAggregator, IRouter } from 'aurelia';
 import { I18N } from '@aurelia/i18n';
+import { Configuration } from '../configuration';
 import './ecos-account-route.css';
 let EcosAccountRoute = class EcosAccountRoute {
-    constructor(router, eventAggregator, i18n, apollo) {
+    constructor(router, eventAggregator, i18n, apollo, conf) {
         this.router = router;
         this.eventAggregator = eventAggregator;
         this.i18n = i18n;
         this.apollo = apollo;
+        this.conf = conf;
         this.events = [];
     }
     async binding() {
@@ -64,7 +67,7 @@ user(id: $userId) {
             // await this.userCommands.logout();
             await this.apollo.logout();
             this.eventAggregator.publish('logout');
-            this.router.load('start');
+            this.router.load(this.conf.unauthorizedDefaultRoute);
         }
         catch (error) {
             EcosNotification.notify(error.message, 'error');
@@ -78,12 +81,13 @@ user(id: $userId) {
         location.href = link;
     }
     loadEcosEditProfileRoute() {
-        this.router.load('../ecos-edit-profile-route');
+        this.router.load({ component: EcosEditProfileRoute, viewport: 'bottom' });
     }
 };
 EcosAccountRoute = __decorate([
-    inject(IRouter, EventAggregator, I18N, ApolloService),
+    inject(IRouter, EventAggregator, I18N, ApolloService, Configuration),
     __param(0, IRouter),
-    __metadata("design:paramtypes", [Object, EventAggregator, Object, ApolloService])
+    __metadata("design:paramtypes", [Object, EventAggregator, Object, ApolloService,
+        Configuration])
 ], EcosAccountRoute);
 export { EcosAccountRoute };

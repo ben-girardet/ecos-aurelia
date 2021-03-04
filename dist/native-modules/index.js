@@ -4,6 +4,7 @@ import { AureliaFastAdapter } from './adapters/fast-adapter';
 import { ApolloService } from './services/apollo-service';
 import * as EcosCustomElements from './custom-elements';
 import * as EcosValueConverters from './value-converters';
+import * as EcosRoutes from './routes';
 import { EcosRouterLifecycles } from './router-lifecycles';
 // TODO: find out if we can conditionnally import these styles
 import './variables.css';
@@ -34,6 +35,8 @@ export const Ecos = {
                     container.register(EcosValueConverters);
                     console.log('ECOS: registering value converters', EcosValueConverters);
                     container.register(AureliaFastAdapter);
+                    console.log('ECOS: registering routes', EcosValueConverters);
+                    container.register(EcosRoutes);
                 }
                 const configuration = new Configuration();
                 configuration.apiHost = config.apiHost;
