@@ -13,5 +13,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./api-service"), exports);
 __exportStar(require("./apollo-service"), exports);
 __exportStar(require("./crypting-service"), exports);
+__exportStar(require("./ecos-service"), exports);
 __exportStar(require("./image-service"), exports);
 __exportStar(require("./network"), exports);

@@ -8,7 +8,7 @@ import { UserCommands } from '../gql';
 import { gql } from 'apollo-boost';
 import { route } from 'aurelia';
 import template from './ecos-edit-profile-route.html';
-import { EcosEmptyComponent } from './ecos-empty-component';
+import { EcosService } from '../services';
 import './ecos-edit-profile-route.css';
 
 @route({data: {auth: '1', blackOpaque: '0'}})
@@ -32,6 +32,7 @@ export class EcosEditProfileRoute implements IRouteViewModel, ICustomElementView
     private imageService: ImageService, 
     private eventAggregator: EventAggregator,
     private apollo: ApolloService,
+    private ecos: EcosService,
     private userCommands: UserCommands) {
     this.imageService.heightRatio = 1;
     this.imageService.cropType = 'square';
@@ -107,14 +108,14 @@ user(id: $userId) {
     try {
       await this.userCommands.editMe(editUserData.firstname, editUserData.lastname, editUserData.picture);
       this.eventAggregator.publish('user:changed', this.apollo.getUserId());
-      this.router.load('../ecos-empty@bottom');
+      this.ecos.emptyViewport('bottom');
     } catch (error) {
       EcosNotification.notify(error.message, 'info');
     }
   }
   
   public cancel(): void {
-    this.router.load('../ecos-empty@bottom');
+    this.ecos.emptyViewport('bottom');
   }
 
   public removeImage(): void {

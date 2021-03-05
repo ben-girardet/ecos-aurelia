@@ -12,4 +12,3 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./ecos-account-route"), exports);
 __exportStar(require("./ecos-edit-profile-route"), exports);
-__exportStar(require("./ecos-empty-component"), exports);

@@ -17,13 +17,15 @@ import { UserCommands } from '../gql';
 import { gql } from 'apollo-boost';
 import { route } from 'aurelia';
 import template from './ecos-edit-profile-route.html';
+import { EcosService } from '../services';
 import './ecos-edit-profile-route.css';
 let EcosEditProfileRoute = class EcosEditProfileRoute {
-    constructor(router, imageService, eventAggregator, apollo, userCommands) {
+    constructor(router, imageService, eventAggregator, apollo, ecos, userCommands) {
         this.router = router;
         this.imageService = imageService;
         this.eventAggregator = eventAggregator;
         this.apollo = apollo;
+        this.ecos = ecos;
         this.userCommands = userCommands;
         this.cropping = false;
         this.imageService.heightRatio = 1;
@@ -91,14 +93,14 @@ user(id: $userId) {
         try {
             await this.userCommands.editMe(editUserData.firstname, editUserData.lastname, editUserData.picture);
             this.eventAggregator.publish('user:changed', this.apollo.getUserId());
-            this.router.load('../ecos-empty@bottom');
+            this.ecos.emptyViewport('bottom');
         }
         catch (error) {
             EcosNotification.notify(error.message, 'info');
         }
     }
     cancel() {
-        this.router.load('../ecos-empty@bottom');
+        this.ecos.emptyViewport('bottom');
     }
     removeImage() {
         this.imageService.removeImage();
@@ -112,6 +114,7 @@ EcosEditProfileRoute = __decorate([
     __metadata("design:paramtypes", [Object, ImageService,
         EventAggregator,
         ApolloService,
+        EcosService,
         UserCommands])
 ], EcosEditProfileRoute);
 export { EcosEditProfileRoute };
