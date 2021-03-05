@@ -31,8 +31,10 @@ let EcosAccountRoute = class EcosAccountRoute {
     }
     async binding() {
         this.user = await this.getUser();
-        this.events.push(this.eventAggregator.subscribe('edit-profile-out', async () => {
-            this.user = await this.getUser();
+        this.events.push(this.eventAggregator.subscribe('user:changed', async (userId) => {
+            if (userId === this.user.id) {
+                this.user = await this.getUser();
+            }
         }));
     }
     attached() {

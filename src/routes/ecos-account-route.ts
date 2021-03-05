@@ -1,4 +1,3 @@
-import { EcosEditProfileRoute } from './ecos-edit-profile-route';
 import { EcosNotification } from '../fast-components';
 import { ApolloService } from '../services';
 import { gql } from 'apollo-boost';
@@ -25,8 +24,10 @@ export class EcosAccountRoute implements IRouteViewModel, ICustomElementViewMode
 
   public async binding(): Promise<void> {
     this.user = await this.getUser();
-    this.events.push(this.eventAggregator.subscribe('edit-profile-out', async () => {
-      this.user = await this.getUser();
+    this.events.push(this.eventAggregator.subscribe('user:changed', async (userId: string) => {
+      if (userId === this.user.id) {
+        this.user = await this.getUser();
+      }
     }));
   }
 
