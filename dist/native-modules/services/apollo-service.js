@@ -33,6 +33,7 @@ let ApolloService = class ApolloService {
         this.conf = conf;
         this.authenticated = false;
         this.isOutOfDate = false;
+        console.log('apollowService constructor', conf);
         this.client = new ApolloClient({
             uri: `${this.conf.apiHost}/graphql`,
             credentials: 'include',
@@ -78,6 +79,7 @@ let ApolloService = class ApolloService {
                     'Failed to fetch',
                     'network timeout'
                 ];
+                console.log('apollo onError', error);
                 const messages = (error.graphQLErrors || [])
                     .map(e => e.message)
                     .filter(m => !hiddenMessages.includes(m));
