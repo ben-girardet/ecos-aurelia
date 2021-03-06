@@ -4,10 +4,12 @@ export interface IConfiguration {
     unauthorizedDefaultRoute: string;
     authorizedDefaultRoute: string;
     includeRefreshToken?: boolean;
+    apolloHiddenMessages?: string[];
 }
 export declare class Configuration implements IConfiguration {
     apiHost: string;
     unauthorizedDefaultRoute: string;
     authorizedDefaultRoute: string;
     includeRefreshToken?: boolean;
+    apolloHiddenMessages?: string[];
 }

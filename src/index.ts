@@ -48,6 +48,7 @@ export const Ecos = {
         configuration.unauthorizedDefaultRoute = config.unauthorizedDefaultRoute;
         configuration.authorizedDefaultRoute = config.authorizedDefaultRoute;
         configuration.includeRefreshToken = config.includeRefreshToken;
+        configuration.apolloHiddenMessages = config.apolloHiddenMessages;
         // console.log('register configuration', configuration);
         container.register(Registration.instance(Configuration, configuration));
       }

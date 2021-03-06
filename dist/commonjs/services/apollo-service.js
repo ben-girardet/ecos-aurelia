@@ -82,9 +82,11 @@ let ApolloService = class ApolloService {
                 const hiddenMessages = [
                     'Invalid refresh token',
                     'No refresh token',
-                    'Failed to fetch',
-                    'network timeout'
+                    'Failed to fetch'
                 ];
+                if (conf.apolloHiddenMessages) {
+                    hiddenMessages.push(...conf.apolloHiddenMessages);
+                }
                 console.log('apollo onError', error);
                 const messages = (error.graphQLErrors || [])
                     .map(e => e.message)

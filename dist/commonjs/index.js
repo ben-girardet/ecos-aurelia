@@ -72,6 +72,7 @@ exports.Ecos = {
                 configuration.unauthorizedDefaultRoute = config.unauthorizedDefaultRoute;
                 configuration.authorizedDefaultRoute = config.authorizedDefaultRoute;
                 configuration.includeRefreshToken = config.includeRefreshToken;
+                configuration.apolloHiddenMessages = config.apolloHiddenMessages;
                 // console.log('register configuration', configuration);
                 container.register(aurelia_1.Registration.instance(configuration_1.Configuration, configuration));
             }
