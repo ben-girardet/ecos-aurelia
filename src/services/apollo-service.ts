@@ -52,6 +52,13 @@ export class ApolloService {
                 ...context.headers,
                 "client-version": "VERSIONNB",
                 "client-platform": `${w.device.platform.toLowerCase()}`,
+            }
+          }));
+        }
+        if (conf.includeRefrehToken === true) {
+          operation.setContext(context => ({
+            headers: {
+                ...context.headers,
                 "ecos-params": "include-refresh-token"
             }
           }));
@@ -88,7 +95,8 @@ export class ApolloService {
         const hiddenMessages = [
           'Invalid refresh token',
           'No refresh token',
-          'Failed to fetch'
+          'Failed to fetch',
+          'network timeout'
         ];
         const messages = (error.graphQLErrors || [])
         .map(e => e.message)

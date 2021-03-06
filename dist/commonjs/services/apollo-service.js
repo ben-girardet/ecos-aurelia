@@ -47,7 +47,12 @@ let ApolloService = class ApolloService {
                 // the window.device object is populated by: `cordova-plugin-device`
                 if (typeof ((_a = w.device) === null || _a === void 0 ? void 0 : _a.platform) === 'string') {
                     operation.setContext(context => ({
-                        headers: Object.assign(Object.assign({}, context.headers), { "client-version": "VERSIONNB", "client-platform": `${w.device.platform.toLowerCase()}`, "ecos-params": "include-refresh-token" })
+                        headers: Object.assign(Object.assign({}, context.headers), { "client-version": "VERSIONNB", "client-platform": `${w.device.platform.toLowerCase()}` })
+                    }));
+                }
+                if (conf.includeRefrehToken === true) {
+                    operation.setContext(context => ({
+                        headers: Object.assign(Object.assign({}, context.headers), { "ecos-params": "include-refresh-token" })
                     }));
                 }
                 if (operation.operationName !== 'Login' && operation.operationName !== 'RefreshToken' && !this.isTokenValid() && this.getUserId()) {
@@ -76,7 +81,8 @@ let ApolloService = class ApolloService {
                 const hiddenMessages = [
                     'Invalid refresh token',
                     'No refresh token',
-                    'Failed to fetch'
+                    'Failed to fetch',
+                    'network timeout'
                 ];
                 const messages = (error.graphQLErrors || [])
                     .map(e => e.message)
