@@ -61,7 +61,8 @@ user(id: $userId) {
     fileId,
     width,
     height
-  }
+  },
+  roles
 }
     }`, variables: { userId: this.apollo.getUserId() }, fetchPolicy: 'network-only' });
         return result.data.user;

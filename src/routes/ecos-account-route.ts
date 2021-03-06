@@ -42,7 +42,14 @@ export class EcosAccountRoute implements IRouteViewModel, ICustomElementViewMode
     this.events = [];
   }
 
-  public async getUser(): Promise<{id: string, firstname: string, lastname: string, email: string, mobile: string, picture:{fileId: string, width: number, height: number}[]}> {
+  public async getUser(): Promise<{
+    id: string, 
+    firstname: string, 
+    lastname: string, 
+    email: string, 
+    mobile: string, 
+    picture:{fileId: string, width: number, height: number}[],
+    roles: string[]}> {
     if (!this.apollo.getUserId()) {
       return null
     }
@@ -52,7 +59,8 @@ export class EcosAccountRoute implements IRouteViewModel, ICustomElementViewMode
       lastname: string, 
       email: string,
       mobile: string,
-      picture: {fileId: string, width: number, height: number}[]}}>({query: gql`query User($userId: String!) {
+      picture: {fileId: string, width: number, height: number}[],
+      roles: string[]}}>({query: gql`query User($userId: String!) {
 user(id: $userId) {
   id,
   firstname,
@@ -63,7 +71,8 @@ user(id: $userId) {
     fileId,
     width,
     height
-  }
+  },
+  roles
 }
     }`, variables: {userId: this.apollo.getUserId()}, fetchPolicy: 'network-only'});
     return result.data.user;

@@ -28,6 +28,7 @@ export declare class EcosAccountRoute implements IRouteViewModel, ICustomElement
             width: number;
             height: number;
         }[];
+        roles: string[];
     }>;
     logout(): Promise<void>;
     updateLanguage(): void;
