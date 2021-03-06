@@ -18,8 +18,8 @@
   "dependencies": {
     "@aurelia/i18n": "dev",
     "@havesource/cordova-plugin-push": "^2.0.0",
-    "@microsoft/fast-components": "^1.17.0",
-    "@microsoft/fast-element": "^0.22.2",
+    "@microsoft/fast-components": "1.14.1",
+    "@microsoft/fast-element": "0.21.1",
     "apollo-boost": "^0.4.9",
     "aurelia": "dev",
     "awesome-phonenumber": "^2.46.0",
