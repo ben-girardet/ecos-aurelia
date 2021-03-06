@@ -56,7 +56,7 @@ export class ApolloService {
             }
           }));
         }
-        if (conf.includeRefrehToken === true) {
+        if (conf.includeRefreshToken === true) {
           operation.setContext(context => ({
             headers: {
                 ...context.headers,

@@ -47,6 +47,7 @@ export const Ecos = {
         configuration.apiHost = config.apiHost;
         configuration.unauthorizedDefaultRoute = config.unauthorizedDefaultRoute;
         configuration.authorizedDefaultRoute = config.authorizedDefaultRoute;
+        configuration.includeRefreshToken = config.includeRefreshToken;
         // console.log('register configuration', configuration);
         container.register(Registration.instance(Configuration, configuration));
       }

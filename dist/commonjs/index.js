@@ -71,6 +71,7 @@ exports.Ecos = {
                 configuration.apiHost = config.apiHost;
                 configuration.unauthorizedDefaultRoute = config.unauthorizedDefaultRoute;
                 configuration.authorizedDefaultRoute = config.authorizedDefaultRoute;
+                configuration.includeRefreshToken = config.includeRefreshToken;
                 // console.log('register configuration', configuration);
                 container.register(aurelia_1.Registration.instance(configuration_1.Configuration, configuration));
             }

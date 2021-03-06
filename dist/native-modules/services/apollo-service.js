@@ -45,7 +45,7 @@ let ApolloService = class ApolloService {
                         headers: Object.assign(Object.assign({}, context.headers), { "client-version": "VERSIONNB", "client-platform": `${w.device.platform.toLowerCase()}` })
                     }));
                 }
-                if (conf.includeRefrehToken === true) {
+                if (conf.includeRefreshToken === true) {
                     operation.setContext(context => ({
                         headers: Object.assign(Object.assign({}, context.headers), { "ecos-params": "include-refresh-token" })
                     }));
