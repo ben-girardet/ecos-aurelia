@@ -18,6 +18,12 @@ let EcosService = class EcosService {
     constructor(router) {
         this.router = router;
     }
+    loadInViewport(route, viewport) {
+        const instructions = this.router.routeTree.root.children.filter((routeNode) => routeNode.viewport !== viewport);
+        route.viewport = viewport;
+        instructions.push(route);
+        this.router.load(instructions);
+    }
     emptyViewport(viewport) {
         const instructions = this.router.routeTree.root.children.filter((routeNode) => routeNode.viewport !== viewport);
         this.router.load(instructions);
