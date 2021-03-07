@@ -41,7 +41,7 @@
   width: 100%;
 }
 
-.ecos-account fast-menu {
+ fast-menu.full-width {
   margin-left: -16px;
   margin-right: -16px;
   max-width: none;
@@ -51,10 +51,10 @@
   margin-bottom: 32px;
 }
 
-.ecos-account fast-menu-item {
+fast-menu.full-width fast-menu-item {
   border-bottom: 1px solid var(--separator-color);
   --corner-radius: 0;
 }
-.ecos-account fast-menu-item:last-of-type {
+fast-menu.full-width fast-menu-item:last-of-type {
   border-bottom: none;
 }
