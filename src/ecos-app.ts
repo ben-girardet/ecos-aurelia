@@ -6,14 +6,13 @@ import { parseColorWebRGB } from "@microsoft/fast-colors";
 import { createColorPalette, parseColorString } from "@microsoft/fast-components";
 import { ApolloService } from './services/apollo-service';
 
-const neutral = 'rgb(200, 200, 200)'; // 'rgb(70,51,175)';
-// const accent = 'rgb(0,201,219)';
-const accent = '#3AC3BD';
-const neutralPalette = createColorPalette(parseColorWebRGB(neutral));
-const accentPalette = createColorPalette(parseColorString(accent));
-
 @inject()
 export class EcosApp implements ICustomElementViewModel {
+
+  public static neutral = 'rgb(200, 200, 200)'; // 'rgb(70,51,175)';
+  public static accent = '#3AC3BD';
+  public static neutralPalette = createColorPalette(parseColorWebRGB(EcosApp.neutral));
+  public static accentPalette = createColorPalette(parseColorString(EcosApp.accent));
 
   public subscriptions: IDisposable[] = [];
   public started = false;
@@ -35,9 +34,9 @@ export class EcosApp implements ICustomElementViewModel {
   public attached(): void {
     this.cordova.adaptProviderWithTheme();
     const provider = document.querySelector("fast-design-system-provider") as HTMLElement & {backgroundColor: string; neutralPalette: string[]; accentPalette: string[]; accentBaseColor: string};
-    provider.neutralPalette = neutralPalette;
-    provider.accentBaseColor = accent;
-    provider.accentPalette = accentPalette;
+    provider.neutralPalette = EcosApp.neutralPalette;
+    provider.accentBaseColor = EcosApp.accent;
+    provider.accentPalette = EcosApp.accentPalette;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const p: any = provider;
     // p.density = 10;

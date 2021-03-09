@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var EcosApp_1;
 import { IRouter, inject, EventAggregator, IPlatform } from 'aurelia';
 import { IRouterEvents } from '@aurelia/router';
 import { CordovaService } from './services/cordova-service';
@@ -17,12 +18,7 @@ import { PageVisibility } from './page-visibility';
 import { parseColorWebRGB } from "@microsoft/fast-colors";
 import { createColorPalette, parseColorString } from "@microsoft/fast-components";
 import { ApolloService } from './services/apollo-service';
-const neutral = 'rgb(200, 200, 200)'; // 'rgb(70,51,175)';
-// const accent = 'rgb(0,201,219)';
-const accent = '#3AC3BD';
-const neutralPalette = createColorPalette(parseColorWebRGB(neutral));
-const accentPalette = createColorPalette(parseColorString(accent));
-let EcosApp = class EcosApp {
+let EcosApp = EcosApp_1 = class EcosApp {
     constructor(router, routerEvents, platform, eventAggregator, pageVisibility, cordova, apollo) {
         this.router = router;
         this.routerEvents = routerEvents;
@@ -41,9 +37,9 @@ let EcosApp = class EcosApp {
     attached() {
         this.cordova.adaptProviderWithTheme();
         const provider = document.querySelector("fast-design-system-provider");
-        provider.neutralPalette = neutralPalette;
-        provider.accentBaseColor = accent;
-        provider.accentPalette = accentPalette;
+        provider.neutralPalette = EcosApp_1.neutralPalette;
+        provider.accentBaseColor = EcosApp_1.accent;
+        provider.accentPalette = EcosApp_1.accentPalette;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const p = provider;
         // p.density = 10;
@@ -162,7 +158,11 @@ let EcosApp = class EcosApp {
         this.subscriptions = [];
     }
 };
-EcosApp = __decorate([
+EcosApp.neutral = 'rgb(200, 200, 200)'; // 'rgb(70,51,175)';
+EcosApp.accent = '#3AC3BD';
+EcosApp.neutralPalette = createColorPalette(parseColorWebRGB(EcosApp_1.neutral));
+EcosApp.accentPalette = createColorPalette(parseColorString(EcosApp_1.accent));
+EcosApp = EcosApp_1 = __decorate([
     inject(),
     __param(0, IRouter),
     __param(1, IRouterEvents),

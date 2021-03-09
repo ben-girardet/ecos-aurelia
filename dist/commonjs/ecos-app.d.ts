@@ -11,6 +11,10 @@ export declare class EcosApp implements ICustomElementViewModel {
     pageVisibility: PageVisibility;
     private cordova;
     apollo: ApolloService;
+    static neutral: string;
+    static accent: string;
+    static neutralPalette: string[];
+    static accentPalette: string[];
     subscriptions: IDisposable[];
     started: boolean;
     constructor(router: IRouter, routerEvents: IRouterEvents, platform: IPlatform, eventAggregator: EventAggregator, pageVisibility: PageVisibility, cordova: CordovaService, apollo: ApolloService);
