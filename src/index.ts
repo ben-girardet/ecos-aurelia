@@ -7,6 +7,7 @@ import * as EcosValueConverters from './value-converters';
 import * as EcosRoutes from './routes';
 import { EcosRouterAuthLifecycles } from './router-auth-lifecycles';
 import { EcosRouterViewsLifecycles } from './router-views-lifecycles';
+import { PageVisibility } from './page-visibility';
 
 // TODO: find out if we can conditionnally import these styles
 import './variables.css';
@@ -51,6 +52,11 @@ export const Ecos = {
         configuration.apolloHiddenMessages = config.apolloHiddenMessages;
         // console.log('register configuration', configuration);
         container.register(Registration.instance(Configuration, configuration));
+        if (!configuration.disablePageVisibility) {
+          container.register(PageVisibility);
+          const pageVisibility = container.get(PageVisibility);
+          pageVisibility.listen();
+        }
       }
     }
   }

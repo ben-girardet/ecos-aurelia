@@ -34,6 +34,7 @@ exports.EcosValueConverters = EcosValueConverters;
 const EcosRoutes = __importStar(require("./routes"));
 const router_auth_lifecycles_1 = require("./router-auth-lifecycles");
 const router_views_lifecycles_1 = require("./router-views-lifecycles");
+const page_visibility_1 = require("./page-visibility");
 // TODO: find out if we can conditionnally import these styles
 require("./variables.css");
 require("./basics.css");
@@ -75,6 +76,11 @@ exports.Ecos = {
                 configuration.apolloHiddenMessages = config.apolloHiddenMessages;
                 // console.log('register configuration', configuration);
                 container.register(aurelia_1.Registration.instance(configuration_1.Configuration, configuration));
+                if (!configuration.disablePageVisibility) {
+                    container.register(page_visibility_1.PageVisibility);
+                    const pageVisibility = container.get(page_visibility_1.PageVisibility);
+                    pageVisibility.listen();
+                }
             }
         };
     }

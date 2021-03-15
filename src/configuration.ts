@@ -5,6 +5,7 @@ export interface IConfiguration {
   authorizedDefaultRoute: string;
   includeRefreshToken?: boolean;
   apolloHiddenMessages?: string[];
+  disablePageVisibility?: boolean;
 }
 export class Configuration implements IConfiguration {
   public apiHost: string;
@@ -12,4 +13,5 @@ export class Configuration implements IConfiguration {
   public authorizedDefaultRoute: string;
   public includeRefreshToken?: boolean;
   public apolloHiddenMessages?: string[];
+  public disablePageVisibility?: boolean;
 }
