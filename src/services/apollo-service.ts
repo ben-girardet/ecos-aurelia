@@ -66,7 +66,6 @@ export class ApolloService {
         }
         if (operation.operationName !== 'Login' && operation.operationName !== 'RefreshToken' && !this.isTokenValid() && this.getUserId()) {
             await this.refreshToken();
-            
         }
         if (operation.operationName === 'RefreshToken' && this.getRefreshToken()) {
           operation.setContext(context => ({
@@ -258,27 +257,60 @@ export class ApolloService {
     return result.data.login;
   }
 
-  public async refreshToken(withPrivateKey = false): Promise<ILogin> {
-    const result = await this.client.mutate({
-      mutation: refreshTokenMutation, 
-      variables: {withPrivateKey},
-      fetchPolicy: 'no-cache'}) as ApolloQueryResult<{refreshToken: ILogin}>;
-    if (result.data.refreshToken.expires instanceof Date) {
-      result.data.refreshToken.expires = result.data.refreshToken.expires.toString();
-    }
-    if (typeof result.data.refreshToken.expires === 'string') {
-      this.setLogin({
-        token: result.data.refreshToken.token,
-        userId: result.data.refreshToken.userId, 
-        expires: result.data.refreshToken.expires,
-        privateKey: result.data.refreshToken.privateKey,
-        state: result.data.refreshToken.state
+  private isRefreshingToken = false;
+  private refreshTokenSubscribers: ((unknown) => void)[] = [];
+  public async refreshToken(withPrivateKey = false): Promise<void> {
+    if (this.isRefreshingToken) {
+      let timeout: any;
+      await new Promise((resolve, reject) => {
+        timeout = setTimeout(reject, 15000);
+        this.refreshTokenSubscribers.push(resolve);
+      }).then(() => {
+        clearTimeout(timeout);
       });
+      if (this.isTokenValid && !withPrivateKey) {
+        return;
+        // return {
+        //   token: this.jwt,
+        //   refreshToken: this.rt,
+        //   refreshTokenExpiry: this.rtExpiry.toString(),
+        //   expires: this.expires.toDate(),
+        //   userId: this.getUserId(),
+        //   privateKey: '',
+        //   state: this.state
+        // }
+      } else {
+        return this.refreshToken(withPrivateKey);
+      }
     }
-    if (typeof result.data.refreshToken.refreshToken === 'string') {
-      this.setRefreshToken(result.data.refreshToken.refreshToken, result.data.refreshToken.refreshTokenExpiry);
+    this.isRefreshingToken = true;
+    try {
+      const result = await this.client.mutate({
+        mutation: refreshTokenMutation, 
+        variables: {withPrivateKey},
+        fetchPolicy: 'no-cache'}) as ApolloQueryResult<{refreshToken: ILogin}>;
+      if (result.data.refreshToken.expires instanceof Date) {
+        result.data.refreshToken.expires = result.data.refreshToken.expires.toString();
+      }
+      if (typeof result.data.refreshToken.expires === 'string') {
+        this.setLogin({
+          token: result.data.refreshToken.token,
+          userId: result.data.refreshToken.userId, 
+          expires: result.data.refreshToken.expires,
+          privateKey: result.data.refreshToken.privateKey,
+          state: result.data.refreshToken.state
+        });
+      }
+      if (typeof result.data.refreshToken.refreshToken === 'string') {
+        this.setRefreshToken(result.data.refreshToken.refreshToken, result.data.refreshToken.refreshTokenExpiry);
+      }
+      this.isRefreshingToken = false;
+      return;
+      // return result.data.refreshToken;
+    } catch (error) {
+      this.isRefreshingToken = false;
+      throw error;
     }
-    return result.data.refreshToken;
   }
 
   public async logout(): Promise<boolean> {

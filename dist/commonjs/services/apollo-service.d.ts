@@ -35,6 +35,8 @@ export declare class ApolloService {
     encrypt(message: string, otherPublicKey: string): Promise<any>;
     decrypt(encryptedMessage: any, otherPublicKey: string): Promise<string>;
     login(username: string, password: string): Promise<ILogin>;
-    refreshToken(withPrivateKey?: boolean): Promise<ILogin>;
+    private isRefreshingToken;
+    private refreshTokenSubscribers;
+    refreshToken(withPrivateKey?: boolean): Promise<void>;
     logout(): Promise<boolean>;
 }
