@@ -7,23 +7,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { lifecycleHooks, inject } from 'aurelia';
+import { lifecycleHooks, inject, ILogger } from 'aurelia';
 import { ApolloService } from './services/apollo-service';
 import { Configuration } from './configuration';
 let EcosRouterAuthLifecycles = class EcosRouterAuthLifecycles {
-    constructor(apollo, conf) {
+    constructor(apollo, conf, logger) {
         this.apollo = apollo;
         this.conf = conf;
+        this.logger = logger.scopeTo('ecos:router-auth-lifecycle');
     }
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     async canLoad(vm, params, next, current) {
         const requiresAuth = current.data.auth !== undefined && current.data.auth !== '0';
         if (requiresAuth && !(await this.apollo.isAuthenticated())) {
+            this.logger.info('requires auth and is not authenticated => redirect to', this.conf.unauthorizedDefaultRoute);
             return this.conf.unauthorizedDefaultRoute;
-        }
-        if (!requiresAuth && (await this.apollo.isAuthenticated()) && current.finalPath === this.conf.unauthorizedDefaultRoute) {
-            return this.conf.authorizedDefaultRoute;
         }
         return true;
     }
@@ -31,6 +33,8 @@ let EcosRouterAuthLifecycles = class EcosRouterAuthLifecycles {
 EcosRouterAuthLifecycles = __decorate([
     lifecycleHooks(),
     inject(),
-    __metadata("design:paramtypes", [ApolloService, Configuration])
+    __param(2, ILogger),
+    __metadata("design:paramtypes", [ApolloService,
+        Configuration, Object])
 ], EcosRouterAuthLifecycles);
 export { EcosRouterAuthLifecycles };

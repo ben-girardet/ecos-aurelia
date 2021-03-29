@@ -108,7 +108,7 @@ export class ApolloService {
           messages.push(error.networkError?.message)
         }
         if (messages.length) {
-          EcosNotification.notify(`${messages.join('; ')}`, 'error');
+          EcosNotification.notify(`${messages.join('; ')}`, 'info');
         }
       }
     });

@@ -97,7 +97,7 @@ let ApolloService = class ApolloService {
                     messages.push((_c = error.networkError) === null || _c === void 0 ? void 0 : _c.message);
                 }
                 if (messages.length) {
-                    ecos_notification_1.EcosNotification.notify(`${messages.join('; ')}`, 'error');
+                    ecos_notification_1.EcosNotification.notify(`${messages.join('; ')}`, 'info');
                 }
             }
         });

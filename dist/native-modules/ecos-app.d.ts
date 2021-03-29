@@ -1,4 +1,4 @@
-import { IRouter, ICustomElementViewModel, EventAggregator, IDisposable, IPlatform } from 'aurelia';
+import { IRouter, ICustomElementViewModel, ILogger, EventAggregator, IDisposable, IPlatform } from 'aurelia';
 import { IRouterEvents, NavigationEndEvent } from '@aurelia/router';
 import { CordovaService } from './services/cordova-service';
 import { PageVisibility } from './page-visibility';
@@ -17,7 +17,8 @@ export declare class EcosApp implements ICustomElementViewModel {
     static accentPalette: string[];
     subscriptions: IDisposable[];
     started: boolean;
-    constructor(router: IRouter, routerEvents: IRouterEvents, platform: IPlatform, eventAggregator: EventAggregator, pageVisibility: PageVisibility, cordova: CordovaService, apollo: ApolloService);
+    private logger;
+    constructor(router: IRouter, routerEvents: IRouterEvents, platform: IPlatform, logger: ILogger, eventAggregator: EventAggregator, pageVisibility: PageVisibility, cordova: CordovaService, apollo: ApolloService);
     attached(): void;
     binding(): Promise<void>;
     loginIfNotAuthenticated(): Promise<boolean>;

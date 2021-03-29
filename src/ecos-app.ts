@@ -1,4 +1,4 @@
-import { IRouter, ICustomElementViewModel, inject, EventAggregator, IDisposable, IPlatform } from 'aurelia';
+import { IRouter, ICustomElementViewModel, ILogger, inject, EventAggregator, IDisposable, IPlatform } from 'aurelia';
 import { IRouterEvents, NavigationEndEvent } from '@aurelia/router';
 import { CordovaService } from './services/cordova-service';
 import { PageVisibility } from './page-visibility'
@@ -17,14 +17,18 @@ export class EcosApp implements ICustomElementViewModel {
   public subscriptions: IDisposable[] = [];
   public started = false;
 
+  private logger: ILogger;
+
   public constructor(
     @IRouter private router: IRouter, 
     @IRouterEvents readonly routerEvents: IRouterEvents,
     @IPlatform readonly platform: IPlatform,
+    @ILogger logger: ILogger,
     public eventAggregator: EventAggregator,
     public pageVisibility: PageVisibility,
     private cordova: CordovaService,
     public apollo: ApolloService ) {
+      this.logger = logger.scopeTo('ecos:app');
       this.pageVisibility.listen();
       document.addEventListener("deviceready", () => {
         this.eventAggregator.publish('device:ready');
@@ -32,6 +36,7 @@ export class EcosApp implements ICustomElementViewModel {
   }
 
   public attached(): void {
+    this.logger.info('attached');
     this.cordova.adaptProviderWithTheme();
     const provider = document.querySelector("fast-design-system-provider") as HTMLElement & {backgroundColor: string; neutralPalette: string[]; accentPalette: string[]; accentBaseColor: string};
     provider.neutralPalette = EcosApp.neutralPalette;
@@ -66,19 +71,13 @@ export class EcosApp implements ICustomElementViewModel {
 
   public async loginIfNotAuthenticated(): Promise<boolean> {
     if (!(await this.apollo.isAuthenticated())) {
-      console.log('loginIfNotAuthenticated: this.router', this.router);
-      // const vp = this.router.getViewport('main');
-      // const componentName = vp.content.content.componentName;
-      // if (!['login', 'start', 'register'].includes(componentName)) {
-      //   this.router.load('start');
-      // }
+      // TODO: should we ensure that the router navigates to login page in this situation ?
       return false;
     }
     return true;
   }
 
   public async bound(): Promise<void> {    
-
     this.routerEvents.subscribe('au:router:navigation-end', (navigation) => {
       this.adjustCordovaAppearance(navigation);
     });
@@ -90,68 +89,10 @@ export class EcosApp implements ICustomElementViewModel {
     this.routerEvents.subscribe('au:router:navigation-start', (navigation) => {
       console.log('navigation start', navigation);
     });
-
-
-    // Authentication HOOK
-    // this.router.addHook(async (instructions: IViewportInstruction[]) => {
-    //   this.global.bumpRoute();
-    //   // User is not logged in, so redirect them back to login page
-    //   const mainInstruction = instructions.find(i => i.viewportName === 'main');
-    //   if (mainInstruction && !(await this.apollo.isAuthenticated())) {
-    //     if (!['login', 'start', 'register'].includes(mainInstruction.componentName)) {
-    //       return [this.router.createViewportInstruction('start', mainInstruction.viewport)];
-    //     }
-    //   }
-    //   if (!this.started) {
-    //     this.started = true;
-    //     this.global.eventAggregator.publish('app:started');
-    //   }
-    //   return true;
-    // });
-
-    // View type HOOK
-    // this.router.addHook(async (instructions: IViewportInstruction[]) => {
-    //   const prayingInstruction = instructions.find(i => i.viewportName === 'praying');
-    //   const bottomInstruction = instructions.find(i => i.viewportName === 'bottom');
-    //   const detailInstruction = instructions.find(i => i.viewportName === 'detail');
-    //   const bottomViewport = this.router.getViewport('bottom');
-    //   const detailViewport = this.router.getViewport('detail');
-    //   if (prayingInstruction) {
-    //     if (prayingInstruction.componentName === 'praying') {
-    //       document.documentElement.classList.add('praying');
-    //       this.eventAggregator.publish(`praying-in`);
-    //       this.shouldDisplayPrayingHelp();
-    //     } else if (prayingInstruction.componentName === '-') {
-    //       document.documentElement.classList.remove('praying');
-    //       this.eventAggregator.publish(`praying-out`);
-    //     }
-    //   }
-    //   if (bottomInstruction) {
-    //     if (bottomInstruction.componentName === '-') {
-    //       document.documentElement.classList.remove('bottom');
-    //       this.eventAggregator.publish(`${bottomViewport.content.content.componentName}-out`);
-    //     } else {
-    //       document.documentElement.classList.add('bottom');
-    //       this.eventAggregator.publish(`${bottomViewport.content.content.componentName}-in`);
-    //     }
-    //   }
-    //   if (detailInstruction) {
-    //     if (detailInstruction.componentName === '-') {
-    //       document.documentElement.classList.remove('detail');
-    //       this.eventAggregator.publish(`${detailViewport.content.content.componentName}-out`);
-    //     } else {
-    //       document.documentElement.classList.add('detail');
-    //       this.eventAggregator.publish(`${detailViewport.content.content.componentName}-in`);
-    //     }
-    //   }
-    //   return true;
-    // }, {
-    //   include: ['praying', '-', 'topic-form', 'topic-detail', 'conversation', 'sharing', 'friends', 'edit-profile', 'notifications-settings']
-    // });
   }
 
   public adjustCordovaAppearance(navigation: NavigationEndEvent): void {
-    console.log('adjustCordovaAppearance', navigation);
+    this.logger.info('adjustCordovaAppearance', navigation);
     this.cordova.adaptProviderWithTheme();
     // this.global.adaptStatusBarWithThemeAndRoute(instructions);
     // this.global.platform.domReadQueue.queueTask(() => {
