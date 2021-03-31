@@ -19,9 +19,19 @@ export class EcosRouterAuthLifecycles {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   public async canLoad(vm: any, params: any, next: RouteNode, current: RouteNode): Promise<boolean | string> {
     const requiresAuth = current.data.auth !== undefined && current.data.auth !== '0';
-    if (requiresAuth && !(await this.apollo.isAuthenticated())) {
+    const onlyUnauth = current.data.onlyUnauth !== undefined && current.data.onlyUnauth !== '0';
+
+    if (!requiresAuth && !onlyUnauth) {
+      return;
+    }
+
+    const isAuth = await this.apollo.isAuthenticated();
+    if (requiresAuth && !isAuth) {
       this.logger.info('requires auth and is not authenticated => redirect to', this.conf.unauthorizedDefaultRoute);
       return this.conf.unauthorizedDefaultRoute;
+    }
+    if (onlyUnauth && isAuth) {
+      this.logger.info('route only for unauth => redirect to', this.conf.authorizedDefaultRoute);
     }
     return true;
   }
